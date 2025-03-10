@@ -29,6 +29,8 @@
             // For each byte of input, PRGA is used for getting the ciphertext of that byte.
             // RC4 is symmetrical, meaning applying this algorithm 
             // for ciphertext will return the initial text
+            i = 0;
+            j = 0;
             byte[] result = new byte[input.Length];
             for(long pos=0; pos < input.LongLength; pos++)
             {
