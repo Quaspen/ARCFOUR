@@ -1,11 +1,17 @@
 ﻿namespace Maniekko.Cryptography
 {
+    /// <summary>
+    /// Represents an implementation of Rivest Cipher 4 (RC4) symmetrical stream cipher algorithm
+    /// </summary>
+    /// <seealse href="https://en.wikipedia.org/wiki/RC4"/>
     public static class RC4
     {
         /// <summary>
-        /// Apply RC4 encoding to a input array of bytes, with a specified key. <para/>
-        /// RC4 is symmetrical, so the same method is used for both data encoding and decoding.
+        /// Apply RC4 encoding to a input array of bytes, with a specified key. 
         /// </summary>
+        /// <remarks>
+        /// RC4 is symmetrical, so the same method is used for both data encoding and decoding.
+        /// </remarks>
         /// <param name="input">Array of bytes to be encoded.</param>
         /// <param name="key">Key for encoding.</param>
         /// <returns>Encypted array of bytes.</returns>
