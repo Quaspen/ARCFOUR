@@ -75,6 +75,26 @@ namespace ARCFOUR.Example
                 WriteLineColored(inputMatchesOutput, inputMatchesOutput ? ConsoleColor.DarkGreen : ConsoleColor.Red);
                 Console.WriteLine();
             }
+
+            WriteLineColored("----- VMPC test -----", ConsoleColor.Cyan);
+            for (int i = 0; i < TestInputs.Length; i++)
+            {
+                // Encode
+                Console.WriteLine($"Input: \"{TestInputs[i]}\"");
+                byte[] cipherBytes = VMPC.Apply(testInputsBytes[i], secretKeyBytes);
+                Console.WriteLine($"Encoded bytes (in Hexadecimal form): \"{Convert.ToHexString(cipherBytes)}\"");
+
+                // Decode
+                byte[] outputBytes = VMPC.Apply(cipherBytes, secretKeyBytes);
+                string decodedOutputString = TextEncoding.GetString(outputBytes);
+                bool inputMatchesOutput = string.Equals(TestInputs[i], decodedOutputString);
+
+                // Output to console
+                Console.WriteLine($"Decoded text: \"{decodedOutputString}\"");
+                Console.Write($"Input matches output: ");
+                WriteLineColored(inputMatchesOutput, inputMatchesOutput ? ConsoleColor.DarkGreen : ConsoleColor.Red);
+                Console.WriteLine();
+            }
         }
 
         /// <summary>

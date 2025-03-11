@@ -33,15 +33,16 @@
             byte j1 = 0, j2 = 0;
             byte[] result = new byte[input.Length];
 
-            for (long i = 0; i < input.LongLength; i++)
+            for (long streamPos = 0; streamPos < input.LongLength; streamPos++)
             {
+                byte i = (byte)(streamPos % 256);
                 j1 = (byte)((j1 + State1[i]) % 256);
                 (State1[i], State1[j1]) = (State1[j1], State1[i]);
                 result[i] = (byte)(input[i] ^ State2[(State1[i] + State1[j1]) % 256]);
 
                 j2 = (byte)((j2 + State2[i]) % 256);
                 (State2[i], State2[j2]) = (State2[j2], State2[i]);
-                result[i] = (byte)(input[i] ^ State1[(State2[i] + State2[j2]) % 256]);
+                result[streamPos] = (byte)(input[streamPos] ^ State1[(State2[i] + State2[j2]) % 256]);
             }
 
             return result;
