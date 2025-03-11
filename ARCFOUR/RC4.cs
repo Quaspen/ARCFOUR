@@ -38,14 +38,13 @@
             i = 0;
             j = 0;
             byte[] result = new byte[input.Length];
-            for(long pos=0; pos < input.LongLength; pos++)
+            for (long streamPosition = 0; streamPosition < input.LongLength; streamPosition++)
             {
                 i = (byte)((i + 1) % 256);
                 j = (byte)((j + State[i]) % 256);
                 (State[i], State[j]) = (State[j], State[i]); // Swap State[i] and State[j]
-                byte t = (byte)((State[i] + State[j]) % 256);
-                byte k = State[t];
-                result[pos] = (byte)(input[pos] ^ k);
+                byte statePos = (byte)((State[i] + State[j]) % 256);
+                result[streamPosition] = (byte)(input[streamPosition] ^ State[statePos]);
             }
 
             return result;
